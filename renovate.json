@@ -1,5 +1,6 @@
 {
-    "extends": ["config:base", ":disableDependencyDashboard"],
+    "extends": [":disableDependencyDashboard"],
+    "baseBranch": "update-dependencies",
     "separateMinorPatch": true,
     "requiredStatusChecks": null,
     "rangeStrategy": "pinned",
