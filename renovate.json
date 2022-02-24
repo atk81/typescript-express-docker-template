@@ -1,5 +1,25 @@
 {
-  "extends": [
-    "config:base"
-  ]
+    "extends": ["config:base", ":disableDependencyDashboard"],
+    "separateMinorPatch": true,
+    "requiredStatusChecks": null,
+    "rangeStrategy": "pinned",
+    "enabled": false,
+    "packageRules": [
+        {
+            "matchUpdateTypes": ["minor", "major"],
+            "enabled": false
+        },
+        {
+            "automerge": true,
+            "labels": ["automerge", "dependencies", "patch"],
+            "groupName": "group:dependencies",
+            "matchDepTypes": ["dependencies"]
+        },
+        {
+            "automerge": true,
+            "labels": ["automerge", "devDependencies", "patch"],
+            "groupName": "group:devDependencies",
+            "matchDepTypes": ["devDependencies"]
+        }
+    ]
 }
