@@ -1,10 +1,11 @@
 {
-    "baseBranch": "update-dependencies",
+    "baseBranch": "main",
     "separateMinorPatch": true,
     "requiredStatusChecks": null,
-    "rangeStrategy": "pinned",
+    "rangeStrategy": "pin",
     "enabled": false,
     "disableDependencyDashboard": true,
+    "labels": ["dependencies"],
     "packageRules": [
         {
             "matchUpdateTypes": ["minor", "major"],
