@@ -3,3 +3,5 @@
 
 echo -e "Running pre-commit hook..."
 echo "Linting..."
+
+npm run lint && npm run test
