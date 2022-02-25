@@ -1,10 +1,10 @@
 {
-    "extends": [":disableDependencyDashboard"],
     "baseBranch": "update-dependencies",
     "separateMinorPatch": true,
     "requiredStatusChecks": null,
     "rangeStrategy": "pinned",
     "enabled": false,
+    "disableDependencyDashboard": true,
     "packageRules": [
         {
             "matchUpdateTypes": ["minor", "major"],
