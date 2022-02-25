@@ -1,27 +1,6 @@
 {
-    "baseBranch": "main",
-    "separateMinorPatch": true,
-    "requiredStatusChecks": null,
-    "rangeStrategy": "pin",
-    "enabled": false,
-    "dependencyDashboard": false,
-    "labels": ["dependencies"],
-    "packageRules": [
-        {
-            "matchUpdateTypes": ["minor", "major"],
-            "enabled": false
-        },
-        {
-            "automerge": true,
-            "labels": ["automerge", "dependencies", "patch"],
-            "groupName": "group:dependencies",
-            "matchDepTypes": ["dependencies"]
-        },
-        {
-            "automerge": true,
-            "labels": ["automerge", "devDependencies", "patch"],
-            "groupName": "group:devDependencies",
-            "matchDepTypes": ["devDependencies"]
-        }
+    "extends": [
+        "config:base",
+        ":disableDependencyDashboard"
     ]
 }
