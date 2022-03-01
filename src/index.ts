@@ -1,7 +1,9 @@
 import dotenv from 'dotenv';
 import express, { Response } from 'express';
 import {logger} from './logger';
+import { errorHandler } from './middleware/errorHandler';
 import morganMiddleware from './morgan';
+import { CustomError } from './utils/response/error';
 import "./utils/response/success"; // Import customSuccess method
 /**
  * Load environment variables from .env file,
@@ -24,6 +26,25 @@ app.use(morganMiddleware);
 app.get('/', (req, res: Response) => {
     res.customSuccess(200, 'Hello World', null);
 });
+
+app.get('/errors', (req, res, next)=>{
+    const error = new CustomError(500, "Application", 'INTERNAL_SERVER_ERROR', [{
+        message: "Something went wrong",
+    }]);
+    next(error);
+});
+
+app.get('*', (req, res, next)=>{
+    const error = new CustomError(404, "General", 'NOT_FOUND', [{
+        message: "Page not found",
+    }]);
+    next(error);
+});
+
+/**
+ * Load the error handler middleware
+ */
+app.use(errorHandler);
 
 /**
  * Listen on provided port, on all network interfaces.
