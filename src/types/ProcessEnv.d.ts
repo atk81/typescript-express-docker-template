@@ -5,5 +5,8 @@ declare namespace NodeJS{
         MONGO_URI_PROD: string;
         MONGO_URI_TEST: string;
         MONGO_URI_LOCAL: string;
+        REDIS_URI_PROD: string;
+        REDIS_URI_TEST: string;
+        REDIS_URI_LOCAL: string;
     }
 }

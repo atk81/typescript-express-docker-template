@@ -3,7 +3,7 @@ import express, { Response } from 'express';
 import {logger} from './logger';
 import { errorHandler } from './middleware/errorHandler';
 import morganMiddleware from './morgan';
-import { mongoClient } from './utils/database/databaseConnect';
+import { mongoClient, redisClient } from './utils/database/databaseConnect';
 import { CustomError } from './utils/response/error';
 import "./utils/response/success"; // Import customSuccess method
 /**
@@ -52,6 +52,8 @@ app.use(errorHandler);
  */
 const mongoclient = mongoClient();
 mongoclient.connect();
+const redisclient = redisClient();
+redisclient.connect();
 
 /**
  * Listen on provided port, on all network interfaces.
