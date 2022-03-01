@@ -3,6 +3,7 @@ import express, { Response } from 'express';
 import {logger} from './logger';
 import { errorHandler } from './middleware/errorHandler';
 import morganMiddleware from './morgan';
+import { mongoClient } from './utils/database/databaseConnect';
 import { CustomError } from './utils/response/error';
 import "./utils/response/success"; // Import customSuccess method
 /**
@@ -47,10 +48,26 @@ app.get('*', (req, res, next)=>{
 app.use(errorHandler);
 
 /**
+ * Database connection
+ */
+const mongoclient = mongoClient();
+mongoclient.connect();
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 app.listen(process.env.PORT || 3000, () => {
     logger.info(`Server started on port ${process.env.PORT || 3000}`);
+    
+});
+
+/**
+ * Handle Process close event
+ */
+process.on('SIGINT', () => {
+    logger.warn('SIGINT signal received. Closing Mongoose connection');
+    // mongoclient.disconnect();
+    process.exit(0);
 });
 
 export default app;
