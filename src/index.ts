@@ -1,5 +1,8 @@
 import dotenv from 'dotenv';
 import express, { Response } from 'express';
+import path from 'path';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 import {logger} from './logger';
 import { errorHandler } from './middleware/errorHandler';
 import morganMiddleware from './morgan';
@@ -23,6 +26,13 @@ const app = express();
  * Load the morgan middleware
  */
 app.use(morganMiddleware);
+
+/**
+ * Load Swagger
+ */
+
+const swaggerDocument = (YAML.load(path.resolve(__dirname,"../openAPI/openapi.yaml")));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res: Response) => {
     res.customSuccess(200, 'Hello World', null);
