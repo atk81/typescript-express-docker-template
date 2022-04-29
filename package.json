@@ -7,14 +7,17 @@
         "build": "rimraf ./dist && tsc",
         "start": "cross-env NODE_ENV=production npm run build && node dist/index.js",
         "start:dev": "nodemon src/index.ts",
-        "dev-server": "NODE_ENV=development nodemon",
+        "dev-server": "cross-env NODE_ENV=development docker-compose -f docker-compose.dev.yml up --build -d && nodemon",
         "postinstall": "chmod +x ./scripts/dev.sh",
         "ts-node-server": "ts-node src/index.ts",
         "lint": "eslint . --ext .ts",
         "lint-and-fix": "eslint . --ext .ts --fix",
         "prepare": "husky install",
-        "test": "mocha --exit --require ts-node/register test/**/*.spec.ts",
-        "coverage": "nyc npm run test"
+        "test": "cross-env NODE_ENV=test mocha --exit --require ts-node/register test/**/*.spec.ts test/**.spec.ts",
+        "coverage": "nyc npm run test",
+        "docker-start": "docker-compose -f docker-compose.dev.yml up -d",
+        "docker-stop": "docker-compose -f docker-compose.dev.yml down",
+        "docker-start-build": "docker-compose -f docker-compose.dev.yml up --build -d"
     },
     "repository": {
         "type": "git",
